@@ -237,3 +237,71 @@ int bad_int_size_is_32() {
 //     printf("0x%x", rotate_left(0x12345678, 20));
 //     return 0;
 // }
+
+
+
+ // 2.70
+
+//  #include<stdio.h>
+//  int fit_bits(int x,int n){
+//   int w= sizeof(int)<<3;
+//   int offset=w-n;
+//   return (x<<offset)>>offset==x;
+//  }
+
+
+//2.71
+
+//This function can’t extract negetive number from packet_t word.
+// return (word>>(bytenum<<3))&0xff
+// #include<stdio.h>
+// typedef unsigned packet_t;
+// // bytenum代表第几个字节 0-3
+// int xbyte(packet_t word, int bytenum) {
+//   int max_bytenum = 3;
+//   return (int) (word << ((max_bytenum - bytenum) << 3) >> (max_bytenum << 3));
+// }
+
+
+// 2.72
+
+// A sizeof(val) is unsgined , int - unsigned = unsigned>=0
+
+// void copy_int(int val,void*buf,int maxbytes){
+//   if(maxbytes >= (int) sizeof(val)>=0)
+//     memcpy(buf,(void*)&val,sizeof(val));
+// }
+
+
+//2.73
+// #include<stdio.h>
+// #include<limits.h>
+// int saturating_add(int x,int y){
+//   int sum=x+y;
+//   int sig_mask=INT_MIN;
+//    /*
+//    * if x > 0, y > 0 but sum < 0, it's a positive overflow
+//    * if x < 0, y < 0 but sum >= 0, it's a negetive overflow
+//    */
+//   int pos_over=(!(x&sig_mask))&&(!(y&sig_mask))&&(sum&sig_mask);
+//   int neg_over=((x&sig_mask))&&((y&sig_mask))&&(!(sum&sig_mask));
+//   (pos_over&&(sum=INT_MAX)||neg_over&&(sum=INT_MIN)); //利用了短路的特性
+//   return sum;
+// }
+
+
+// 2.74
+
+//x-y不溢出就放回一
+// #include<stdio.h>
+// int tsub_ok(int x,int y){
+//    /*
+//    if x>0 y<0 but sub<0 it is a positive overflow
+//    if x<0 y>0 but sub>0 it is a negetive overflow
+//    */
+//   int sub=x-y;
+//   int pos_over=x>0&&y<0&&sub<0;
+//   int neg_over=x<0&&y>0&&sub>0;
+//   return pos_over||neg_over;
+// }
+
