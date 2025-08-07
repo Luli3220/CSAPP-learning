@@ -305,3 +305,71 @@ int bad_int_size_is_32() {
 //   return pos_over||neg_over;
 // }
 
+
+
+
+
+//2.75
+// #include<stdio.h>
+// int signed_high_prob(int x,int y){
+//   __int64 mul=(__int64)x*y;
+//   mul>>=32;
+//   return mul;
+// }
+// unsigned unsigned_high_prob(unsigned x,unsigned y){
+//   int sig_x=x>>31; 
+//   int sig_y=y>>31;
+//   int signed_prod = signed_high_prod(x, y);  //返回有符号乘法的高32位
+//   return signed_prod+x*sig_y+y*sig_x;  //可以乘法拆开易得此补偿
+// }
+ 
+
+
+// 2.76
+// #include<stdio.h>
+// #include<stdlib.h>
+// #include<string.h>
+// void *another_calloc(size_t nmemb,size_t size){
+//    if(nmemb==0||size==0) return NULL;
+//    size_t buf_size=nmemb*size;
+//    if(nmemb==buf_size/size){
+//     void *ptr=malloc(buf_size);
+//     if(ptr!=NULL) memset(ptr,0,buf_size);
+//    }
+//   return NULL;
+// }
+
+
+//2.77
+// #include<stdio.h>
+// //K=17
+// int fun1(int x){
+//   return (x<<4)+x; 
+// }
+// //K=-7
+// int fun2(int x){
+//   return -(x<<3)+x;
+// }
+// //K=60
+// int fun3(int x){
+//   return (x<<6)-(x<<2);
+// }
+// //K=-112
+// int fun4(int x){
+//   return -(x<<7)+(x<<4)
+// }
+
+
+
+//2.78
+// 0<=k<w-1  x/2^k
+// #include<stdio.h>
+// #include<limits.h>
+// //x>>k：右移操作对负数的结果是向零取整，而不是向下取整。
+// int divide_power2(int x,int k){
+//   int is_neg=x&INT_MIN;
+//   (is_neg&&(x=x+(1<<k)-1)); 
+//   return x>>k; 
+// }
+
+
